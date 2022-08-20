@@ -8,7 +8,7 @@ var crosshair_x
 var crosshair_y 
 
 var proj_type_path:String = "res://src/Projectiles/projectile-types/Lemon.tscn"
-var proj_path_path:String = "res://src/Projectiles/projectile-paths/StraighSinglePath.tscn"
+var proj_path_path:String = "res://src/Projectiles/projectile-paths/ThreeWayPath.tscn"
 var ProjTypeScene:PackedScene = load(proj_type_path)
 var ProjPathScene:PackedScene = load(proj_path_path)
 
@@ -50,6 +50,7 @@ func shoot() -> void:
 	if Input.is_action_just_pressed("shoot"):
 		var projSpawner:ProjectilePath = ProjPathScene.instance()
 		projSpawner.ProjTypeScene = ProjTypeScene
+		print(projSpawner.ProjTypeScene)
 		projSpawner.position = crosshair.global_position
 		projSpawner.player_position = position
 		projSpawner.crosshair_vector = Vector2(crosshair_x,crosshair_y)

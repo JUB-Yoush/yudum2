@@ -8,11 +8,11 @@ var proj1Velocity:Vector2 = Vector2.ZERO
 var proj2Velocity:Vector2 = Vector2.ZERO
 var proj3Velocity:Vector2 = Vector2.ZERO
 
+
 var proj2Offset:float = 0.7
 var proj3Offset:float = -0.7
 
 func _ready() -> void:
-	speed = 3
 	projInstance1.position = position
 	projInstance2.position = position
 	projInstance3.position = position
@@ -31,7 +31,7 @@ func update_velocity() -> void:
 	proj3Velocity = proj3Vector * speed 
 
 func _physics_process(delta: float) -> void:
-	projInstance1.position += proj1Velocity
-	projInstance2.position += proj2Velocity
-	projInstance3.position += proj3Velocity
+	projInstance1.position += proj1Velocity + (player_velocity/150)
+	projInstance2.position += proj2Velocity + (player_velocity/150)
+	projInstance3.position += proj3Velocity + (player_velocity/150)
 

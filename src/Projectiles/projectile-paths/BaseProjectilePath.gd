@@ -3,12 +3,18 @@ class_name ProjectilePath
 
 var ProjTypeScene:PackedScene
 
-var projInstance:ProjectileType
+var projInstance
 var crosshair_position:Vector2
 var player_position:Vector2
+var player_velocity:Vector2 = Vector2.ZERO
 var crosshair_angle:float
 var crosshair_vector:Vector2
-var speed:int
+
+export var speed:int
+export var ammo_cost:int
+export var cooling_time:float
+export var base_ammo:int
+export var lifespan:float
 
 func _ready() -> void:
 	pass

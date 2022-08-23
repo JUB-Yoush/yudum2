@@ -10,14 +10,15 @@ class_name Enemy
 onready var hitbox := $Hitbox
 onready var playerDetector := $PlayerDetector
 var velocity:Vector2
-var damage:int
-var hp:int
-var speed:int 
-var prone_speed:int
-var mutagen:PackedScene
+export var damage:int
+export var hp:int
+export var speed:int 
+export var prone_speed:int
+export var type_mutagen:PackedScene
+export var path_mutagen:PackedScene
 var player:KinematicBody2D
 var player_position:Vector2
-var prone_hp:int
+export var prone_hp:int
 
 
 enum STATES {DEFAULT,PLAYER_FOUND,PRONE}
@@ -55,3 +56,6 @@ func on_pdetector_area_entered(area:Area2D) -> void:
 func player_detected(detected_player:KinematicBody2D) -> void:
 	#print('p detected')
 	pass
+
+func die():
+	queue_free()

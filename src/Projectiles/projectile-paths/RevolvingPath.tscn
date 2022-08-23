@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Projectiles/projectile-paths/BaseProjectilePath.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Projectiles/projectile-paths/RevolvingPath.gd" type="Script" id=2]
+
+[node name="RevolvingPath" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+id = "Revolving"
+speed = 30
+ammo_cost = 1
+cooling_time = 0.1

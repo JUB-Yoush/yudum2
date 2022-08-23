@@ -2,18 +2,21 @@
 
 [ext_resource path="res://src/Projectiles/projectile-types/BaseProjectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Projectiles/projectile-types/Lemon.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/lemon.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
 
 [node name="Lemon" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+id = "Lemon"
+speed = 5
 damage = 1
-lifespan = 0.25
+lifespan = 0.4
+cooling_time = 0.5
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 1, 0.960784, 0, 1 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]

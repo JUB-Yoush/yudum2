@@ -5,7 +5,8 @@
 
 [node name="ThreeWayPath" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+id = "Triple"
 speed = 6
 ammo_cost = 2
 cooling_time = 0.75
-lifespan = 0.3
+lifespan = 0.2

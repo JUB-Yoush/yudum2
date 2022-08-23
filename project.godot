@@ -42,6 +42,10 @@ config/name="Yudum 2"
 run/main_scene="res://src/main/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/height=576
+
 [importer_defaults]
 
 texture={

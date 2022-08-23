@@ -1,11 +1,6 @@
 extends Enemy
 
 func _ready() -> void:
-	hp = 10
-	speed = 150
-	prone_speed = 50
-	prone_hp = 3
-	mutagen = load("res://src/Projectiles/projectile-types/Lemon.tscn")
 	pass
 
 

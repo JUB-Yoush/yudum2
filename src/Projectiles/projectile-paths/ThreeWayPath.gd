@@ -16,6 +16,13 @@ func _ready() -> void:
 	projInstance1.position = position
 	projInstance2.position = position
 	projInstance3.position = position
+	projInstance1.lifespan += lifespan
+	projInstance2.lifespan += lifespan
+	projInstance3.lifespan += lifespan
+	projInstance1.damage += extra_damage
+	projInstance2.damage += extra_damage
+	projInstance3.damage += extra_damage
+	cooling_time += projInstance1.cooling_time
 	get_parent().add_child(projInstance1)
 	get_parent().add_child(projInstance2)
 	get_parent().add_child(projInstance3)
@@ -31,7 +38,7 @@ func update_velocity() -> void:
 	proj3Velocity = proj3Vector * speed 
 
 func _physics_process(delta: float) -> void:
-	projInstance1.position += proj1Velocity + (player_velocity/150)
-	projInstance2.position += proj2Velocity + (player_velocity/150)
-	projInstance3.position += proj3Velocity + (player_velocity/150)
+	projInstance1.position += proj1Velocity 
+	projInstance2.position += proj2Velocity 
+	projInstance3.position += proj3Velocity 
 

@@ -1,6 +1,7 @@
 extends Area2D
 class_name ProjectileType
 
+export var id:String 
 export var speed:int
 export var damage:int
 export var lifespan:float
@@ -31,6 +32,7 @@ func projectile_action(area_parent:KinematicBody2D):
 	pass
 
 func on_lifespan_timeout():
+	#print(lifespan)
 	erase()
 
 

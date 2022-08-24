@@ -9,6 +9,8 @@ class_name Enemy
 
 onready var hitbox := $Hitbox
 onready var playerDetector := $PlayerDetector
+onready var animPlayer := $AnimationPlayer
+onready var sprite := $Sprite
 var velocity:Vector2
 export var damage:int
 export var hp:int
@@ -26,6 +28,7 @@ enum STATES {DEFAULT,PLAYER_FOUND,PRONE}
 var _state = STATES.DEFAULT
 
 func _ready() -> void:
+	
 	hitbox.connect("area_entered",self,"on_hitbox_area_entered")
 	playerDetector.connect("area_entered",self,"on_pdetector_area_entered")
 	pass
@@ -40,8 +43,20 @@ func on_hitbox_area_entered(area:Area2D) -> void:
 func take_damage(damage:int):
 	#print("hit by " + str(damage))
 	hp = max(0,hp-damage)
+	
 	if hp <= prone_hp:
 		_state = STATES.PRONE
+	sprite.visible = false
+	yield(get_tree().create_timer(0.1),"timeout")
+	sprite.visible = true
+	yield(get_tree().create_timer(0.1),"timeout")
+	sprite.visible = false
+	yield(get_tree().create_timer(0.1),"timeout")
+	sprite.visible = true
+	
+	if hp <= 0:
+		die()
+	
 	
 
 func hit_by_proj(area:ProjectileType) -> void:
@@ -58,4 +73,6 @@ func player_detected(detected_player:KinematicBody2D) -> void:
 	pass
 
 func die():
+	Score.score += 1
+	Score.emit_signal("score_changed",Score.score)
 	queue_free()

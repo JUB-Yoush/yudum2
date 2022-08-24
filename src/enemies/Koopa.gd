@@ -7,7 +7,7 @@ var shotTime:float = 0.5
 
 func _ready() -> void:
 	playerDetector.connect("area_exited",self,"on_pdetector_area_exited")
-	player = get_parent().get_node('Player')
+	player = get_parent().get_parent().get_node('Player')
 	player_position = player.position
 	shotTimer.connect("timeout",self,"on_shottimer_timeout")
 	shotTimer.wait_time = shotTime
@@ -16,6 +16,12 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	#animPlayer.play('walk')
+	if velocity.x > 0:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+		
 	match _state:
 		STATES.DEFAULT:
 			state_defualt()
@@ -43,6 +49,7 @@ func state_player_found():
 	pass
 
 func state_prone():
+	sprite.modulate = ("ff0000")
 	if player_position == null:
 		velocity = Vector2(rand_range(0, 10), rand_range(0, 10)).normalized() * prone_speed
 	else:
@@ -66,14 +73,13 @@ func on_pdetector_area_exited(area:Area2D):
 
 func on_shottimer_timeout():
 	if _state == STATES.PLAYER_FOUND:
-		print('spawn proj')
-		spawn_proj()
+		animPlayer.play("shoot")
 
 func spawn_proj():
-	print('timeout')
+	
 	var proj = Proj.instance()
 	proj.speed = proj_speed
 	proj.velocity = (player.position - position).normalized()
 	proj.position = position
-	print(proj.velocity)
+		#print(proj.velocity)
 	get_parent().add_child(proj)

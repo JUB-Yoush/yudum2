@@ -39,6 +39,9 @@ func update_velocity() -> void:
 
 func _physics_process(delta: float) -> void:
 	projInstance1.position += proj1Velocity 
+	projInstance1.rotation += proj1Velocity.angle() 
 	projInstance2.position += proj2Velocity 
+	projInstance2.rotation += proj2Velocity.angle() 
 	projInstance3.position += proj3Velocity 
+	projInstance3.rotation += proj3Velocity.angle() 
 

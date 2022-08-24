@@ -39,8 +39,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Yudum 2"
-run/main_scene="res://src/main/Main.tscn"
+run/main_scene="res://src/screens/StartScreen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+projRef="*res://src/autoloads/proj_paths.gd"
+Score="*res://src/autoloads/score.gd"
 
 [display]
 

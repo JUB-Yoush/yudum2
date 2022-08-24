@@ -1,10 +1,33 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/enemies/BaseEnemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/enemies/Koopa.gd" type="Script" id=2]
-[ext_resource path="res://src/Projectiles/projectile-paths/TwinfirePath.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Projectiles/projectile-types/Apple.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/koopa1.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shoot"
+length = 1.5
+step = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_proj"
+}, {
+"args": [  ],
+"method": "spawn_proj"
+}, {
+"args": [  ],
+"method": "spawn_proj"
+} ]
+}
 
 [node name="Koopa" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -12,9 +35,8 @@ damage = 1
 hp = 10
 speed = 100
 prone_speed = 50
-type_mutagen = ExtResource( 4 )
-path_mutagen = ExtResource( 3 )
-proj_speed = 1
+prone_hp = 3
+proj_speed = 4
 
 [node name="ShotTimer" type="Timer" parent="." index="0"]
 autostart = true
@@ -29,3 +51,6 @@ position = Vector2( 0, 1 )
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( -0.5, 1.5 )
+
+[node name="AnimationPlayer" parent="." index="5"]
+anims/shoot = SubResource( 1 )

@@ -5,6 +5,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	animPlayer.play('walk')
 	match _state:
 		STATES.DEFAULT:
 			state_defualt()
@@ -36,6 +37,7 @@ func state_player_found():
 	pass
 
 func state_prone():
+	sprite.modulate = ("ff0000")
 	if player_position == null:
 		velocity = Vector2(rand_range(0, 10), rand_range(0, 10)).normalized() * prone_speed
 	else:

@@ -30,7 +30,7 @@ export var cursor_radius = 48
 var crosshair_x 
 var crosshair_y 
 
-var iframe_time:float = 0.75
+var iframe_time:float = 0.4
 var iframes_on:bool = false
 
 var gun_cooling := false
@@ -55,12 +55,15 @@ onready var ammoRegenTimer:Timer = $AmmoRegen
 onready var hitboxArea:Area2D = $Hitbox
 onready var iFrameTimer:Timer = $IFrameTimer
 onready var animPlayer:AnimationPlayer = $AnimationPlayer
+onready var sprite:Sprite = $Sprite
 
 
 enum STATES {IDLE,SHOOTING,DASHING,DASH_ENDLAG}
 
 var _state = STATES.IDLE
 func _ready() -> void:
+	randomize()
+	position = get_parent().get_node("PlayerSpawnPoint").position
 	hitboxArea.connect("area_entered",self,"on_hitbox_area_entered")
 	ammoRegenTimer.connect("timeout",self,"on_ammoRegen_timeout")
 	iFrameTimer.connect("timeout",self,"on_iframe_timeout")
@@ -92,7 +95,15 @@ func state_idle(delta):
 	shoot()
 	move(delta)
 	dash(delta)
+	if input_vector == Vector2.ZERO and not iframes_on:
+		animPlayer.play("idle")
+	elif input_vector != Vector2.ZERO and not iframes_on:
+		animPlayer.play("walk")
 	#regen_ammo()
+	if input_vector.x > 0:
+		sprite.flip_h = true
+	elif input_vector.x < 0:
+		sprite.flip_h = false
 	pass
 
 func state_shooting(delta):
@@ -191,7 +202,7 @@ func on_ammoRegen_timeout():
 	pass
 
 func ate_enemy(enemy:Enemy):
-	prints(enemy.type_mutagen,enemy.path_mutagen)
+	#s(enemy.type_mutagen,enemy.path_mutagen)
 	update_weapon(enemy.type_mutagen,enemy.path_mutagen)
 	if hp < max_hp:
 		hp += 1
@@ -210,7 +221,14 @@ func take_damage(damage:int):
 		iFrameTimer.start()
 		hp = max(0,hp-damage)
 		emit_signal("hp_changed",hp,max_hp)
+		if hp <= 0:
+			game_over()
 		pass
 
 func on_iframe_timeout():
 	iframes_on = false
+
+func game_over():
+	get_tree().change_scene("res://src/screens/LoseScreen.tscn")
+	pass
+

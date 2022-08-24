@@ -21,5 +21,5 @@ func update_velocity():
 	pass
 
 func _physics_process(delta: float) -> void:
-	print(velocity)
+	#(velocity)
 	position += Vector2(3,3) + velocity
